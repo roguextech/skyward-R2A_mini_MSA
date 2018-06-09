@@ -15,79 +15,66 @@
 %% LAUNCH SETUP
 
 % rocket name
-settings.rocket_name = 'R2A';
+settings.rocket_name = 'R2A_mini';
 
 % launchpad 6
 settings.z0 = 5;                %[m] Launchpad Altitude
-settings.lrampa = 4.5;          %[m] LaunchPad route (launchpad length-distance from ground of the first hook)
+settings.lrampa = 4;          %[m] LaunchPad route (launchpad length-distance from ground of the first hook)
 
 
 % starting altitude
-settings.OMEGA = 80*pi/180;    %[rad] Elevation Angle, user input in degrees (ex. 80)
+settings.OMEGA = 90*pi/180;    %[rad] Elevation Angle, user input in degrees (ex. 80)
 settings.PHI = 90*pi/180;      %[rad] Azimuth Angle from North Direction, user input in degrees (ex. 90)
 
 %% ENGINE DETAILS
 
 % sintax:
-% engine = 1 -> Cesaroni PRO 150 White Thunder
-% engine = 2 -> Cesaroni PRO 150 SkidMark
-% engine = 3 -> Cesaroni PRO 150 BlueStreak
-engine = 3;
+% engine 1 -> Cesaroni PRO 75 856L910-P Cstar
+% engine 2 -> Cesaroni PRO 54 L730
+engine = 1;
 
 switch engine
-    case 1
-        % Cesaroni PRO 150 White Thunder
-        % Sampling for thrust interpolation
-        settings.motor.Name = 'Cesaroni PRO 150 White Thunder';
-        settings.motor.exp_time = [0 0.05 0.15 0.5 0.6 0.74 0.85 1.15 1.7 2.4 3 ...
-            4 4.5 4.8 4.9 5 5.05 5.1 5.15 5.2];  % [s]
-        settings.motor.exp_thrust = [8605.1 8900 7900 8400 8400 8250 8200 8300 ...
-            8400 8400 8200 7800 7600 7450 7350 7300 4500 500 100 0]; % [N]
+       case 1 
+        settings.motor.Name = 'K1000T-P';
+        settings.motor.exp_time =   [0   0.0150    0.0250    0.0950    0.2000    0.3000    0.4000    0.5000    0.6000    0.7000    0.8000    0.9000...
+    1.0000    1.1000    1.2000    1.3000    1.4000    1.5000    1.6000    1.7000    1.8000    1.9000    2.0000    2.1000...
+    2.1800    2.2000    2.2180    2.2690    2.3000    2.3320    2.3560    2.3890    2.4360    2.5000]; % [s]
+        settings.motor.exp_thrust = [ 0.8951    1.1198    1.0933    1.0966    1.1099    1.1165    1.1231    1.1330    1.1396    1.1363    1.1363    1.1363...
+    1.1396    1.1330    1.1297    1.1264    1.1198    1.1099    1.0966    1.0636    1.0174    0.9711    0.9150    0.8687...
+     0.8654    0.8786    0.8588    0.6705    0.5780    0.4459    0.3369    0.2246    0.1057     0].*1e3; % [N]
         
-        settings.m0 = 67.761;                    % [kg]    Overall Mass (Burnout + Propellant)
-        settings.ms = 43.961;                    % [kg]    Structural Mass (Burnout - Nosecone)
-        settings.mp = 18.6;                      % [kg]    Propellant Mass
-        settings.tb = 5.12;                      % [s]     Burning Time
-        settings.mfr = settings.mp/settings.tb;  % [kg/s]  Mass Flow Rate
-    case 2
-        % Cesaroni PRO 150 SkidMark
-        % Sampling for thrust interpolation
-        settings.motor.Name = 'Cesaroni PRO 150 SkidMark';
-        settings.motor.exp_time = [0 0.1 0.2 0.3 0.4 0.5 0.6 0.8 1.2 1.8 3.2 ...
-            3.6 4.8 6 7 7.2 7.6 7.8 7.9 8 8.1 8.19]; % [s]
-        settings.motor.exp_thrust = [0 3400 3100 3000 3300 3400 3500 3700 3700 ...
-            3800 4000 4081.6 3900 3800 3700 3500 3350 3200 3000 2000 750 0]; % [N]
-        
-        settings.m0 = 64.9;                       % [kg]    Overall Mass
-        settings.ms = 46.8;                       % [kg]    Structural Mass (Burnout)
-        settings.mp = settings.m0-settings.ms;    % [kg]    Propellant Mass
-        settings.tb = 8.19;                       % [s]     Burning Time
-        settings.mfr = settings.mp/settings.tb;   % [kg/s]  Mass Flow Rate
-    case 3
-        % Cesaroni PRO 150 BlueStreak
-        % Sampling for thrust interpolation
-        settings.motor.Name = 'Cesaroni PRO 150 BlueStreak';
-        settings.motor.exp_time =   [0 0.06 0.1 0.15 0.25 0.45 0.8  1     2    3 ...
-            4     5   6   6.8  7.05 7.3 7.6 7.8]; % [s]
-        settings.motor.exp_thrust = [0 800 4000 5500 5160 5130 5400 5300 5450 5347 ...
-            5160 4950 4700 4400 4400 3800 300 0]; % [N]
-        
-        settings.m0 = 63.29017;                       % [kg]   Overall Mass
-        settings.ms = 44.39217;                       % [kg]   Structural Mass (Burnout)
+        settings.m0 = 11.954; % [kg]   Overall Mass
+        settings.ms = 10.72; % [kg]
+        settings.mnc = 0.149;     % [kg]   Nosecone Mass
+        settings.tb = 2.5; % [s]
         settings.mp = settings.m0-settings.ms;    % [kg]   Propellant Mass
-        settings.mnc = 6.21;                      % [kg]   Nosecone Mass
-        settings.tb = 7.60;                       % [s]    Burning Time
-        settings.mfr = settings.mp/settings.tb;   % [kg/s] Mass Flow Rate
+        settings.mfr = settings.mp/settings.tb;  % [kg/s] Mass Flow Rate
+   case 2
+        settings.motor.Name = 'K560W-PS';
+        settings.motor.exp_time = [ 0   0.2900    0.4840    0.6790    0.8740    1.0690    1.2640    1.4580...
+        1.6530    1.8480    2.0430    2.2370    2.4320    2.6270    2.8220    3.0170...
+        3.2110    3.4060    3.6010    3.7960    3.9910    4.1850    4.3800    4.5750...
+        4.7700    4.9650]; %[s]
+        setting.motor.exp_thrust = [552.1230  645.4030  681.1090  716.1670  742.6780  764.7780  775.7100  785.8590...
+        789.3050  789.0770  744.6220  676.8860  614.7110  557.9080  503.6410  455.5040...
+        412.0450  372.9630  335.9870  307.3460  279.8560  223.4910   70.4410   10.0280...
+        2.4450         0]; % [N]
+        
+        settings.m0 = 12.096; % [kg]   Overall Mas
+        settings.ms = 10.672; % [kg]
+        settings.mp = settings.m0-settings.ms;    % [kg]   Propellant Mass
+        settings.mnc = 0.149;                      % [kg]   Nosecone Mass
+        settings.tb = 4.9; % [s]
+        settings.mfr = settings.mp/settings.tb;  % [kg/s] Mass Flow Rate
 end
-
 
 %% GEOMETRY DETAILS
 % This parameters should be the same parameters set up in MISSILE DATCOM
 % simulation.
 
-settings.C = 0.174;         % [m]      Caliber (Fuselage Diameter)
-settings.S = 0.02378;       % [m^2]    Cross-sectional Surface
-L = 4.43619;                % [m]      Rocket length
+settings.C = 0.09;         % [m]      Caliber (Fuselage Diameter)
+settings.S = 0.0064;       % [m^2]    Cross-sectional Surface
+L = 2.20;                % [m]      Rocket length
 
 %% MASS GEOMERTY DETAILS
 % x-axis: along the fuselage
@@ -95,14 +82,15 @@ L = 4.43619;                % [m]      Rocket length
 % z-axis: downward
 
 % inertias for full configuration (with all the propellant embarqued) obtained with CAD's
-settings.Ixxf = 0.27;       % [kg*m^2] Inertia to x-axis
-settings.Iyyf = 84.42;      % [kg*m^2] Inertia to y-axis
-settings.Izzf = 84.42;      % [kg*m^2] Inertia to z-axis
+settings.Ixxf = 0.0142;       % [kg*m^2] Inertia to x-axis
+settings.Iyyf = 3.8691;      % [kg*m^2] Inertia to y-axis
+settings.Izzf = 3.8692;      % [kg*m^2] Inertia to z-axis
 
 % inertias for empty configuration (all the propellant consumed) obtained with CAD's
-settings.Ixxe = 0.21;       % [kg*m^2] Inertia to x-axis
-settings.Iyye = 65.77;      % [kg*m^2] Inertia to y-axis
-settings.Izze = 65.77;      % [kg*m^2] Inertia to z-axis
+settings.Ixxe = 0.0133;       % [kg*m^2] Inertia to x-axis
+settings.Iyye = 3.1032;      % [kg*m^2] Inertia to y-axis
+settings.Izze = 3.1033;      % [kg*m^2] Inertia to z-axis
+
 
 %% AERODYNAMICS DETAILS
 % These coefficients are obtained using MISSILE DATCOM
@@ -222,8 +210,8 @@ settings.wind.MagMin = 8;                    % [m/s] Minimum Magnitude
 settings.wind.MagMax = 8;                    % [m/s] Maximum Magnitude
 settings.wind.ElMin = 0*pi/180;              % [rad] Minimum Elevation, user input in degrees (ex. 0)
 settings.wind.ElMax = 0*pi/180;              % [rad] Maximum Elevation, user input in degrees (ex. 0) (Max == 90 Deg)
-settings.wind.AzMin = (360)*pi/180;           % [rad] Minimum Azimuth, user input in degrees (ex. 90)
-settings.wind.AzMax = (360)*pi/180;           % [rad] Maximum Azimuth, user input in degrees (ex. 90)
+settings.wind.AzMin = (270)*pi/180;           % [rad] Minimum Azimuth, user input in degrees (ex. 90)
+settings.wind.AzMax = (270)*pi/180;           % [rad] Maximum Azimuth, user input in degrees (ex. 90)
 
 % NOTE: wind aziumt angle indications (wind directed towards):
 % 0 deg (use 360 instead of 0)  -> North
@@ -233,7 +221,7 @@ settings.wind.AzMax = (360)*pi/180;           % [rad] Maximum Azimuth, user inpu
 
 %% BALLISTIC SIMULATION
 
-settings.ballistic = false;                  % Set to True to run a standard ballistic (without drogues) simulation
+settings.ballistic = true;                  % Set to True to run a standard ballistic (without drogues) simulation
 
 %% SECOND DROGUE FAILURE
 % simulation in wich second drogue does not open and thus landing is
@@ -251,7 +239,7 @@ settings.ldf = true;
 % simulation stopped when reaching the apogee and thus there is no
 % descend phase.   Only available for standard stochastic runs!!!
 
-settings.ao = false;
+settings.ao = true;
 
 %% STOCHASTIC DETAILS
 % If N > 1 the stochastic routine is started
@@ -261,7 +249,7 @@ settings.stoch.N = 1;             % Number of cases
 %% PLOT DETAILS
 
 settings.plots = true;
-settings.only_XCP = false; % plot only the stability margin
+settings.only_XCP = true; % plot only the stability margin
 
 %% CLEARING VARIABLES NOT NEEDED
 
