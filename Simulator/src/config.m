@@ -74,7 +74,7 @@ end
 
 settings.C = 0.09;         % [m]      Caliber (Fuselage Diameter)
 settings.S = 0.0064;       % [m^2]    Cross-sectional Surface
-L = 2.01;                % [m]      Rocket length
+L = 1.91;                % [m]      Rocket length
 
 %% MASS GEOMERTY DETAILS
 % x-axis: along the fuselage
@@ -82,14 +82,14 @@ L = 2.01;                % [m]      Rocket length
 % z-axis: downward
 
 % inertias for full configuration (with all the propellant embarqued) obtained with CAD's
-settings.Ixxf = 0.01763;       % [kg*m^2] Inertia to x-axis
-settings.Iyyf = 2.09676;      % [kg*m^2] Inertia to y-axis
-settings.Izzf = 2.096987;      % [kg*m^2] Inertia to z-axis
+settings.Ixxf = 0.01101;       % [kg*m^2] Inertia to x-axis
+settings.Iyyf = 2.1137;      % [kg*m^2] Inertia to y-axis
+settings.Izzf = 2.1139;      % [kg*m^2] Inertia to z-axis
 
 % inertias for empty configuration (all the propellant consumed) obtained with CAD's
-settings.Ixxe = 0.0098369;       % [kg*m^2] Inertia to x-axis
-settings.Iyye = 1.73354;      % [kg*m^2] Inertia to y-axis
-settings.Izze = 1.73376;      % [kg*m^2] Inertia to z-axis
+settings.Ixxe = 0.01024;       % [kg*m^2] Inertia to x-axis
+settings.Iyye = 1.76211;      % [kg*m^2] Inertia to y-axis
+settings.Izze = 1.76235;      % [kg*m^2] Inertia to z-axis
 
 
 %% AERODYNAMICS DETAILS
@@ -105,7 +105,7 @@ settings.Izze = 1.73376;      % [kg*m^2] Inertia to z-axis
 % Note: All the parameters (AoA,Betas,Altitudes,Machs) must be the same for
 % empty and full configuration
 
- DATA_PATH = '/Users/teo/Desktop/skyward/r2a_mini/simulatore_matlab/data/';
+ DATA_PATH = '../data/';
  filename = strcat(DATA_PATH, settings.rocket_name);
 
  % Coefficients in full configuration
@@ -185,7 +185,7 @@ settings.ode.optionsdesc = odeset('AbsTol',1E-3,'RelTol',1E-12,...
 
 % Settings for the Wind Model
 
-settings.wind.model = true;
+settings.wind.model = false;
 % set to true for hwsm wind model
 % set to false for random wind model
 % input Day and Hour as arrays to run stochastic simulations
@@ -217,12 +217,12 @@ settings.wind.input_matr = [ 5    7    9   10    11    11   13   12   13   13   
 
 % Wind is generated randomly from the minimum to the maximum parameters which defines the wind.
 % Setting the same values for min and max will fix the parameters of the wind.
-settings.wind.MagMin = 3;                    % [m/s] Minimum Magnitude
-settings.wind.MagMax = 3;                    % [m/s] Maximum Magnitude
+settings.wind.MagMin = 8;                    % [m/s] Minimum Magnitude
+settings.wind.MagMax = 8;                    % [m/s] Maximum Magnitude
 settings.wind.ElMin = 0*pi/180;              % [rad] Minimum Elevation, user input in degrees (ex. 0)
 settings.wind.ElMax = 0*pi/180;              % [rad] Maximum Elevation, user input in degrees (ex. 0) (Max == 90 Deg)
-settings.wind.AzMin = (90)*pi/180;           % [rad] Minimum Azimuth, user input in degrees (ex. 90)
-settings.wind.AzMax = (90)*pi/180;           % [rad] Maximum Azimuth, user input in degrees (ex. 90)
+settings.wind.AzMin = (270)*pi/180;           % [rad] Minimum Azimuth, user input in degrees (ex. 90)
+settings.wind.AzMax = (270)*pi/180;           % [rad] Maximum Azimuth, user input in degrees (ex. 90)
 
 % NOTE: wind aziumt angle indications (wind directed towards):
 % 0 deg (use 360 instead of 0)  -> North
